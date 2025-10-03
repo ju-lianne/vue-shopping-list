@@ -11,7 +11,18 @@ const todos = ref<Todo[]>([
 
 const newTodoText = ref('');
 
+let nextId = 4;
+
 const addTodo = () => {
+  if (newTodoText.value.length > 0) {
+    const newTodo: Todo = {
+      id: nextId++,
+      content: newTodoText.value,
+      done: false,
+    };
+    todos.value.unshift(newTodo);
+    newTodoText.value = '';
+  }
 };
 
 const toggleTodo = (id: number) => {
